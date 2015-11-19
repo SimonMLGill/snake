@@ -40,9 +40,14 @@ public class Tui {
         miscOut("Please log in.");
 
         HashMap <String, Integer> hashMap = Logic.authenticateUser(enterUsername(), Security.hashing(enterPassword()));
-
+        try{
         if (hashMap.get("usertype") == 1) {
             hashMap.put("code", 0);
+        }else if (hashMap.get("usertype") == 0) {
+            hashMap.put("code", 2);
+
+        }} catch(NullPointerException n){
+            System.out.println("" + n);
         }
 
         int code = hashMap.get("code");
@@ -125,6 +130,7 @@ public class Tui {
 
         //TODO: This should work! - DONE
         User usr = new User();
+
         usr.setFirstName(enterFirstName());
         usr.setLastName(enterLastName());
         usr.setEmail(enterEmail());

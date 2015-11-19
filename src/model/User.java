@@ -2,6 +2,8 @@ package model;
 
 import java.sql.Date;
 import java.util.Scanner;
+import database.DatabaseDriver;
+
 
 
 /**
@@ -20,10 +22,8 @@ public class User {
     private String status;
     private String email;
     private int type;
-    public User () {}
-
+    public User(){}
     //creating get and set method for all the variables, so they can be used by other classes
-
 
     public int getId() {
         return id;
@@ -96,4 +96,7 @@ public class User {
     public void setType(int type) {
         this.type = type;
     }
+
+
+
 }

@@ -3,8 +3,8 @@
 	"port": "3306",
 	"username": "root",
 	"password": "",
-	"dbname": "dbcon",
+	"dbname": "snake",
 	"hashingsalt": "123456",
 	"encryptionkey": "123456",
-	"serverport": 8888
+	"serverport": 8889
 }
