@@ -1,9 +1,6 @@
-package model;
+package server.model;
 
 import java.sql.Date;
-import java.util.Scanner;
-import database.DatabaseDriver;
-
 
 
 /**

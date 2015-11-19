@@ -1,12 +1,12 @@
-package tui;
+package server.tui;
 
 import java.util.*;
 
-import controller.Logic;
-import controller.Security;
+import server.controller.Logic;
+import server.controller.Security;
 import database.DatabaseWrapper;
-import model.Game;
-import model.User;
+import server.model.Game;
+import server.model.User;
 
 public class Tui {
 

@@ -1,21 +1,21 @@
-package api;
+package server.api;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import controller.Logic;
-import controller.Security;
+import server.controller.Logic;
+import server.controller.Security;
 import database.DatabaseWrapper;
-import model.Game;
-import model.Score;
-import model.User;
+import server.model.Game;
+import server.model.Score;
+import server.model.User;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
-@Path("/api")
+@Path("/server/api")
 public class Api {
 
     @GET //"GET-Request" gør at vi kan forspørge en specifik data

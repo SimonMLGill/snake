@@ -1,14 +1,14 @@
-package controller;
+package server.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import database.DatabaseWrapper;
-import model.Game;
-import model.Gamer;
-import model.Score;
-import model.User;
+import server.model.Game;
+import server.model.Gamer;
+import server.model.Score;
+import server.model.User;
 
 
 /**

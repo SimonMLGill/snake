@@ -1,9 +1,9 @@
-package controller;
+package server.controller;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import model.Config;
+import server.model.Config;
 import sun.misc.BASE64Encoder;
 import sun.misc.BASE64Decoder;
 /**

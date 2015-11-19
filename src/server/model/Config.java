@@ -1,4 +1,4 @@
-package model;
+package server.model;
 
 //import org.codehaus.jettison.json.JSONException;
 //import org.codehaus.jettison.json.JSONObject;

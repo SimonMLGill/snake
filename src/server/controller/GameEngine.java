@@ -1,10 +1,9 @@
-package controller;
-import javafx.util.Pair;
+package server.controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import model.Game;
-import model.Gamer;
+import server.model.Game;
+import server.model.Gamer;
 
 /**
  * Class to determine who wins the game and all functions that are relevant in that sense.

@@ -1,11 +1,10 @@
-package api;
+package server.api;
 
 import com.sun.jersey.api.container.httpserver.HttpServerFactory;
 import com.sun.net.httpserver.HttpServer;
-import controller.Logic;
-import model.Config;
-import tui.Tui;
-import model.User;
+import server.model.Config;
+import server.tui.Tui;
+import server.model.User;
 
 import java.io.IOException;
 
@@ -24,7 +23,7 @@ public class Main {
         HttpServer server = HttpServerFactory.create("http://localhost:" + Config.getServerPort() + "/");
         server.start();
         System.out.println("Server running");
-        System.out.println("Visit: http://localhost:" + Config.getServerPort() + "/api");
+        System.out.println("Visit: http://localhost:" + Config.getServerPort() + "/server/api");
         Tui.serverMenu();
         System.out.println("Hit return to confirm to stop...");
         System.in.read();
