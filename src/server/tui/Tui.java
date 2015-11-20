@@ -4,7 +4,7 @@ import java.util.*;
 
 import server.controller.Logic;
 import server.controller.Security;
-import database.DatabaseWrapper;
+import server.database.DatabaseWrapper;
 import server.model.Game;
 import server.model.User;
 

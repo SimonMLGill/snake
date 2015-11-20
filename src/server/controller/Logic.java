@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import database.DatabaseWrapper;
+import server.database.DatabaseWrapper;
 import server.model.Game;
 import server.model.Gamer;
 import server.model.Score;

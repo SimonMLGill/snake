@@ -7,7 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import server.controller.Logic;
 import server.controller.Security;
-import database.DatabaseWrapper;
+import server.database.DatabaseWrapper;
 import server.model.Game;
 import server.model.Score;
 import server.model.User;
