@@ -19,6 +19,8 @@ public class Logic {
 
 		serverConnection = new ServerConnection();
 
+		sdkLogic = new SdkLogic();
+
 	}
 	
 	public void run(){
@@ -32,6 +34,7 @@ public class Logic {
 		snakeScreen.show(snakeScreen.Login);
 
 		serverConnection.get("api/");
+
 
 	}
 
@@ -47,6 +50,8 @@ public class Logic {
 		@Override
 		public void actionPerformed(ActionEvent e){
 			if (e.getSource() == snakeScreen.getLogin().getLoginBtn()){
+
+				sdkLogic.login(snakeScreen.getLogin().getUsernameField(), snakeScreen.getLogin().getPasswordField());
 				snakeScreen.show(snakeScreen.Menu);
 			}
 		}
