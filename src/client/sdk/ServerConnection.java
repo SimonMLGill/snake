@@ -49,20 +49,18 @@ public class ServerConnection {
 
     }
 
-    public void post(String json, String path){
+    public String post(String json, String path){
+         String message = "";
 
         Client client = Client.create();
 
-        WebResource webResource = client.resource(getHostAddress() + ":" + getPort() + "/server/api/" + path);
+        WebResource webResource = client.resource(getHostAddress() + ":" + getPort() + "/api/" + path);
         ClientResponse response = webResource.type("application/json").post(ClientResponse.class, json);
 
-        if (response.getStatus() != 200 && response.getStatus() != 201) {
-            throw new RuntimeException("Failed : HTTP error code : "
-                    + response.getStatus());
+        if (response != null){
+            message = response.getEntity(String.class);
         }
 
-        String output = response.getEntity(String.class);
-        System.out.println(output);
-
+        return message;
     }
 }
