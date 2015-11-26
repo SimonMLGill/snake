@@ -54,7 +54,7 @@ public class Logic {
 			if (e.getSource() == snakeScreen.getLogin().getLoginBtn()){
 
 				sdkLogic.login(snakeScreen.getLogin().getUsernameField(), snakeScreen.getLogin().getPasswordField());
-				
+
 				snakeScreen.getMenu().setUserField(snakeScreen.getLogin().getUsernameField());
 				snakeScreen.getNewGame().setUserField(snakeScreen.getLogin().getUsernameField());
 				snakeScreen.getHighscores().setUserField(snakeScreen.getLogin().getUsernameField());
@@ -88,8 +88,8 @@ public class Logic {
 				snakeScreen.getNewGame().setUserField("");
 				String name = JOptionPane.showInputDialog(snakeScreen, "Please enter the name of the game: ",
 						"Game name", JOptionPane.QUESTION_MESSAGE);
-				//sdkLogic.createGame();
-				snakeScreen.getNewGame().getOpponentTbl().setModel(sdkLogic.getAllUsers());
+				//sdkLogic.createGame(name, 10, sdkLogic.getUser());
+				snakeScreen.getNewGame().getAvailableGamesTbl().setModel(sdkLogic.getHighscores());
 
 			}else if(e.getSource() == snakeScreen.getNewGame().getShowLogRdbtn()){
 				snakeScreen.getNewGame().getHideLogRdbtn().setSelected(false);
