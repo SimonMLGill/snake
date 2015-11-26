@@ -4,6 +4,7 @@ import client.gui.SnakeScreen;
 import client.sdk.*;
 import com.mysql.fabric.Server;
 
+import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -33,7 +34,8 @@ public class Logic {
 		
 		snakeScreen.show(snakeScreen.Login);
 
-		serverConnection.get("api/");
+		//serverConnection.get("api/");
+		//serverConnection.get("api/games/open/");
 
 
 	}
@@ -52,6 +54,11 @@ public class Logic {
 			if (e.getSource() == snakeScreen.getLogin().getLoginBtn()){
 
 				sdkLogic.login(snakeScreen.getLogin().getUsernameField(), snakeScreen.getLogin().getPasswordField());
+				
+				snakeScreen.getMenu().setUserField(snakeScreen.getLogin().getUsernameField());
+				snakeScreen.getNewGame().setUserField(snakeScreen.getLogin().getUsernameField());
+				snakeScreen.getHighscores().setUserField(snakeScreen.getLogin().getUsernameField());
+				snakeScreen.getAbout().setUserField(snakeScreen.getLogin().getUsernameField());
 				snakeScreen.show(snakeScreen.Menu);
 			}
 		}
@@ -78,6 +85,12 @@ public class Logic {
 			if(e.getSource() == snakeScreen.getNewGame().getMoveBtn()){
 				snakeScreen.getNewGame().getMoveField();
 				snakeScreen.getNewGame().setLogArea(snakeScreen.getNewGame().getMoveField());
+				snakeScreen.getNewGame().setUserField("");
+				String name = JOptionPane.showInputDialog(snakeScreen, "Please enter the name of the game: ",
+						"Game name", JOptionPane.QUESTION_MESSAGE);
+				//sdkLogic.createGame();
+				snakeScreen.getNewGame().getOpponentTbl().setModel(sdkLogic.getAllUsers());
+
 			}else if(e.getSource() == snakeScreen.getNewGame().getShowLogRdbtn()){
 				snakeScreen.getNewGame().getHideLogRdbtn().setSelected(false);
 				snakeScreen.getNewGame().getShowLogRdbtn().setSelected(true);
