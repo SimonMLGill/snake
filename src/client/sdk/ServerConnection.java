@@ -50,11 +50,11 @@ public class ServerConnection {
     }
 
     public String post(String json, String path){
-         String message = "";
+        String message = "";
 
         Client client = Client.create();
 
-        WebResource webResource = client.resource(getHostAddress() + ":" + getPort() + "/api/" + path);
+        WebResource webResource = client.resource(getHostAddress() + ":" + getPort() + "/server/api/" + path);
         ClientResponse response = webResource.type("application/json").post(ClientResponse.class, json);
 
         if (response != null){
