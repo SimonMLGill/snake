@@ -10,10 +10,15 @@ import java.awt.event.ActionEvent;
 
 public class Logic {
 
+	// logic/controller class that connects the backend with the frontend
+	// creating variables of the screen-, backendlogic-, connector to server- and user class
+
 	private SnakeScreen snakeScreen;
 	private SdkLogic sdkLogic;
 	private ServerConnection serverConnection;
 	private User currentUser;
+
+	// creating objects of the aforementioned classes
 
 	public Logic(){
 		snakeScreen = new SnakeScreen();
@@ -26,6 +31,9 @@ public class Logic {
 		currentUser = new User();
 
 	}
+
+	// run method that adds the actionlistener classes for each of the JPanels
+	// and effectively runs the frontend
 
 	public void run(){
 
@@ -43,6 +51,8 @@ public class Logic {
 
 	}
 
+	// trolling/Rick Roll method - because i can
+
 	public void RickRoll(String url){
 		try{
 			java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
@@ -50,6 +60,9 @@ public class Logic {
 			System.out.print("error");
 		}
 	}
+
+	// actionlistener for the Login JPanel, which ensures that
+	// the user can login and accordingly be rejected if inputs are incorrect
 
 	public class LoginActionListener implements ActionListener {
 		@Override
@@ -80,6 +93,9 @@ public class Logic {
 		}
 	}
 
+	// actionlistener for the menu JPanel ensuring the JButtons work
+	// accordingly
+
 	public class MenuActionListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e){
@@ -94,6 +110,10 @@ public class Logic {
 			}
 		}
 	}
+
+	// acitonlistener for the newgame JPanel that enables the user
+	// to create a game, join a game, and see the available/open games
+	// on the server
 
 	public class NewGameActionListener implements ActionListener {
 		@Override
@@ -112,10 +132,8 @@ public class Logic {
 				String message = sdkLogic.createGame(createGame);
 				snakeScreen.getNewGame().setLogArea(snakeScreen.getNewGame().getMoveField());
 				System.out.println(message);
-				//snakeScreen.getNewGame().setUserField("");
 
-				//sdkLogic.createGame(name, 10, sdkLogic.getUser());
-				snakeScreen.getNewGame().getAvailableGamesTbl().setModel(sdkLogic.getHighscores());
+				snakeScreen.getNewGame().getAvailableGamesTbl().setModel(sdkLogic.openGames());
 
 			}else if(e.getSource() == snakeScreen.getNewGame().getShowLogRdbtn()){
 				snakeScreen.getNewGame().getHideLogRdbtn().setSelected(false);
@@ -134,9 +152,13 @@ public class Logic {
 		}
 	}
 
+	// actionlistener to the highscores JPanel that shows the highscores
+	// on the server
+
 	public class HighscoresActionListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e){
+			snakeScreen.getHighscores().getHighscoresTbl().setModel(sdkLogic.getHighscores());
 			if(e.getSource() == snakeScreen.getHighscores().getLogOutBtn()){
 				snakeScreen.show(SnakeScreen.Login);
 			}else if(e.getSource() == snakeScreen.getHighscores().getMenuBtn()){
@@ -144,6 +166,9 @@ public class Logic {
 			}
 		}
 	}
+
+	// actionlistener the the about JPanel that solidifies the RickRoll method
+	// and furthermore delivers general information to the user
 
 	public class AboutActionListener implements ActionListener {
 		@Override
