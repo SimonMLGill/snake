@@ -13,7 +13,8 @@ public class Logic {
 	private SnakeScreen snakeScreen;
 	private SdkLogic sdkLogic;
 	private ServerConnection serverConnection;
-	
+	private User currentUser;
+
 	public Logic(){
 		snakeScreen = new SnakeScreen();
 		snakeScreen.setVisible(true);
@@ -22,16 +23,18 @@ public class Logic {
 
 		sdkLogic = new SdkLogic();
 
+		currentUser = new User();
+
 	}
-	
+
 	public void run(){
-		
+
 		snakeScreen.getLogin().addActionListener(new LoginActionListener());
 		snakeScreen.getMenu().addActionListener(new MenuActionListener());
 		snakeScreen.getNewGame().addActionListener(new NewGameActionListener());
 		snakeScreen.getHighscores().addActionListener(new HighscoresActionListener());
 		snakeScreen.getAbout().addActionListener(new AboutActionListener());
-		
+
 		snakeScreen.show(snakeScreen.Login);
 
 		//serverConnection.get("api/");
@@ -50,20 +53,33 @@ public class Logic {
 
 	public class LoginActionListener implements ActionListener {
 		@Override
-		public void actionPerformed(ActionEvent e){
-			if (e.getSource() == snakeScreen.getLogin().getLoginBtn()){
+		public void actionPerformed(ActionEvent e) {
 
-				sdkLogic.login(snakeScreen.getLogin().getUsernameField(), snakeScreen.getLogin().getPasswordField());
+					if (e.getSource() == snakeScreen.getLogin().getLoginBtn()) {
+						try{
+						currentUser.setUsername(snakeScreen.getLogin().getUsernameField());
+						currentUser.setPassword(snakeScreen.getLogin().getPasswordField());
+						String message = sdkLogic.login(currentUser);
 
-				snakeScreen.getMenu().setUserField(snakeScreen.getLogin().getUsernameField());
-				snakeScreen.getNewGame().setUserField(snakeScreen.getLogin().getUsernameField());
-				snakeScreen.getHighscores().setUserField(snakeScreen.getLogin().getUsernameField());
-				snakeScreen.getAbout().setUserField(snakeScreen.getLogin().getUsernameField());
-				snakeScreen.show(snakeScreen.Menu);
-			}
+						if (message.equals("Login successful")) {
+							snakeScreen.getMenu().setUserField(snakeScreen.getLogin().getUsernameField());
+							snakeScreen.getNewGame().setUserField(snakeScreen.getLogin().getUsernameField());
+							snakeScreen.getHighscores().setUserField(snakeScreen.getLogin().getUsernameField());
+							snakeScreen.getAbout().setUserField(snakeScreen.getLogin().getUsernameField());
+							snakeScreen.getLogin().clearFields();
+							snakeScreen.show(snakeScreen.Menu);
+						} else
+							JOptionPane.showMessageDialog(snakeScreen, "An error has occurred, please retype" +
+									"\n username and/or password.", "Error", JOptionPane.ERROR_MESSAGE);
+
+					}catch (NullPointerException n){
+							n.printStackTrace();
+						}
+
+				}
 		}
 	}
-	
+
 	public class MenuActionListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e){
@@ -78,16 +94,26 @@ public class Logic {
 			}
 		}
 	}
-	
+
 	public class NewGameActionListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e){
 			if(e.getSource() == snakeScreen.getNewGame().getMoveBtn()){
-				snakeScreen.getNewGame().getMoveField();
-				snakeScreen.getNewGame().setLogArea(snakeScreen.getNewGame().getMoveField());
-				snakeScreen.getNewGame().setUserField("");
+
+				Game createGame = new Game();
 				String name = JOptionPane.showInputDialog(snakeScreen, "Please enter the name of the game: ",
 						"Game name", JOptionPane.QUESTION_MESSAGE);
+				createGame.setName(name);
+				createGame.setMapsize(30);
+				Gamer host = new Gamer();
+				host.setUserId(currentUser.getUserId());
+				host.setControls(snakeScreen.getNewGame().getMoveField());
+				createGame.setHost(host);
+				String message = sdkLogic.createGame(createGame);
+				snakeScreen.getNewGame().setLogArea(snakeScreen.getNewGame().getMoveField());
+				System.out.println(message);
+				//snakeScreen.getNewGame().setUserField("");
+
 				//sdkLogic.createGame(name, 10, sdkLogic.getUser());
 				snakeScreen.getNewGame().getAvailableGamesTbl().setModel(sdkLogic.getHighscores());
 
@@ -104,7 +130,7 @@ public class Logic {
 			}else if(e.getSource() == snakeScreen.getNewGame().getLogOutBtn()){
 				snakeScreen.show(snakeScreen.Login);
 			}
-			
+
 		}
 	}
 
