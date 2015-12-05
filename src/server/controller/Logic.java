@@ -259,4 +259,7 @@ public class Logic {
     public static ArrayList<Score> getScoresByUserID(int userId) {
         return db.getScoresByUserID(userId);
     }
+    public static ArrayList<Score> getHighScores(){
+        return db.getHighScores();
+    }
 }
