@@ -5,6 +5,9 @@ import java.util.Date;
  * Created by Simon DonGill on 12-11-2015.
  */
 public class Game {
+
+    // variables that define a game
+
     private int gameId;
     private int result;
     private int newGame;
@@ -16,9 +19,17 @@ public class Game {
     private String opponentControls;
     private int status;
     private Date created;
+    private int mapSize;
+
+    // setters and getters to the aforementioned variables
+
 
     public void setGameId(int gameId) {
         this.gameId = gameId;
+    }
+
+    public int getGameId(){
+        return gameId;
     }
 
     public void setResult(int result) {
@@ -35,6 +46,10 @@ public class Game {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getName(){
+        return name;
     }
 
     public void setHostControls(String hostControls) {
@@ -61,4 +76,7 @@ public class Game {
         this.created = created;
     }
 
+    public void setMapsize(int mapSize){
+        this.mapSize = mapSize;
+    }
 }

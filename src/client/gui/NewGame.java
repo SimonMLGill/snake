@@ -1,32 +1,44 @@
 package client.gui;
+import client.sdk.Game;
+import client.sdk.TableModelOpenGames;
+
 import javax.swing.*;
 
 import java.awt.Color;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 
 public class NewGame extends JPanel {
+
+	// variables/components that populate this JPanel
+
 	private JTextField moveField;
-	private JTable opponentTbl;
+	private JTable availableGamesTbl;
 	private JTextField userField;
 	private JLabel snakeLbl;
-	private JLabel opponentsLbl;
+	private JLabel availableGamesLbl;
 	private JLabel nextMovesLbl;
 	private JButton moveBtn;
 	private JTextArea logArea;
 	private JButton logBtn;
-	private JButton endGameBtn;
+	private JButton runGameBtn;
 	private JLabel loggedInAsLbl;
 	private JButton logOutBtn;
 	private JButton menuBtn;
 	private JRadioButton showLogRdbtn;
 	private JRadioButton hideLogRdbtn;
+	private JScrollPane scrollPane;
+	private TableModelOpenGames model;
+
 
 	/**
 	 * Create the panel.
 	 */
+
+	// components to the JPanel
 	public NewGame() {
 		setBackground(new Color(255, 255, 224));
 		setLayout(null);
@@ -37,10 +49,10 @@ public class NewGame extends JPanel {
 		snakeLbl.setBounds(30, 11, 209, 81);
 		add(snakeLbl);
 		
-		opponentsLbl = new JLabel("Opponents:");
-		opponentsLbl.setFont(new Font("Gill Sans MT", Font.BOLD, 14));
-		opponentsLbl.setBounds(30, 119, 94, 14);
-		add(opponentsLbl);
+		availableGamesLbl = new JLabel("Available Games:");
+		availableGamesLbl.setFont(new Font("Gill Sans MT", Font.BOLD, 14));
+		availableGamesLbl.setBounds(30, 119, 118, 14);
+		add(availableGamesLbl);
 		
 		nextMovesLbl = new JLabel("Enter next moves:");
 		nextMovesLbl.setFont(new Font("Gill Sans MT", Font.BOLD, 14));
@@ -52,12 +64,20 @@ public class NewGame extends JPanel {
 		moveField.setBounds(291, 117, 89, 20);
 		add(moveField);
 		moveField.setColumns(10);
-		
-		opponentTbl = new JTable();
-		opponentTbl.setFont(new Font("Gill Sans MT", Font.PLAIN, 11));
-		opponentTbl.setBounds(30, 144, 126, 96);
-		add(opponentTbl);
-		
+
+		availableGamesTbl = new JTable();
+		availableGamesTbl.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		availableGamesTbl.setAutoCreateRowSorter(true);
+		//scrollPane.setViewportView(availableGamesTbl);
+		availableGamesTbl.setFont(new Font("Gill Sans MT", Font.PLAIN, 11));
+		availableGamesTbl.setVisible(true);
+
+		scrollPane = new JScrollPane(availableGamesTbl);
+		scrollPane.setBounds(30, 144, 126, 96);
+		scrollPane.setVisible(true);
+		add(scrollPane);
+
+
 		moveBtn = new JButton("Commit");
 		moveBtn.setFont(new Font("Gill Sans MT", Font.BOLD, 14));
 		moveBtn.setBounds(291, 145, 89, 23);
@@ -75,10 +95,10 @@ public class NewGame extends JPanel {
 		logBtn.setBounds(179, 209, 89, 23);
 		add(logBtn);
 		*/
-		endGameBtn = new JButton("End Game");
-		endGameBtn.setFont(new Font("Gill Sans MT", Font.BOLD, 14));
-		endGameBtn.setBounds(278, 209, 101, 23);
-		add(endGameBtn);
+		runGameBtn = new JButton("Run Game");
+		runGameBtn.setFont(new Font("Gill Sans MT", Font.BOLD, 14));
+		runGameBtn.setBounds(278, 209, 105, 23);
+		add(runGameBtn);
 		
 		loggedInAsLbl = new JLabel("Logged in as:");
 		loggedInAsLbl.setFont(new Font("Gill Sans MT", Font.BOLD, 14));
@@ -113,16 +133,20 @@ public class NewGame extends JPanel {
 		add(hideLogRdbtn);
 
 	}
+
+	// adding actionlisteners the JButtons and JRadioButtons
 	
 	public void addActionListener(ActionListener n){
 		moveBtn.addActionListener(n);
-		endGameBtn.addActionListener(n);
+		runGameBtn.addActionListener(n);
 		logOutBtn.addActionListener(n);
 		menuBtn.addActionListener(n);
 		showLogRdbtn.addActionListener(n);
 		hideLogRdbtn.addActionListener(n);
 	}
-	
+
+	// setters and getters to some of the components
+
 	public JButton getMoveBtn(){
 		return moveBtn;
 	}
@@ -131,8 +155,8 @@ public class NewGame extends JPanel {
 		return logBtn;
 	}
 	
-	public JButton getEndGameBtn(){
-		return endGameBtn;
+	public JButton getRunGameBtn(){
+		return runGameBtn;
 	}
 	
 	public JButton getLogOutBtn(){
@@ -154,10 +178,29 @@ public class NewGame extends JPanel {
 	public JTextArea getLogArea(){
 		return logArea;
 	}
+
 	public JRadioButton getShowLogRdbtn(){
 		return showLogRdbtn;
 	}
 	public JRadioButton getHideLogRdbtn(){
 		return hideLogRdbtn;
+	}
+
+	public void setUserField(String user){
+		userField.setText(user);
+
+	}
+
+	public JTable getAvailableGamesTbl(){
+		return availableGamesTbl;
+	}
+
+	public void setAvailableGamesTbl(ArrayList<Game> games){
+		model = new TableModelOpenGames(games);
+		availableGamesTbl.setModel(model);
+	}
+
+	public void setMoveField(String text){
+		moveField.setText(text);
 	}
 }

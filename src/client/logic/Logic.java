@@ -5,8 +5,10 @@ import client.sdk.*;
 import com.mysql.fabric.Server;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 public class Logic {
 
@@ -17,6 +19,8 @@ public class Logic {
 	private SdkLogic sdkLogic;
 	private ServerConnection serverConnection;
 	private User currentUser;
+	private Game game;
+	private ArrayList<Game> games;
 
 	// creating objects of the aforementioned classes
 
@@ -47,7 +51,8 @@ public class Logic {
 
 		//serverConnection.get("api/");
 		//serverConnection.get("api/games/open/");
-
+		//System.out.println(sdkLogic.getHighscores());
+		//System.out.println(sdkLogic.openGames());
 
 	}
 
@@ -80,6 +85,8 @@ public class Logic {
 							snakeScreen.getHighscores().setUserField(snakeScreen.getLogin().getUsernameField());
 							snakeScreen.getAbout().setUserField(snakeScreen.getLogin().getUsernameField());
 							snakeScreen.getLogin().clearFields();
+							games = sdkLogic.openGames();
+							snakeScreen.getNewGame().setAvailableGamesTbl(games);
 							snakeScreen.show(snakeScreen.Menu);
 						} else
 							JOptionPane.showMessageDialog(snakeScreen, "An error has occurred, please retype" +
@@ -122,7 +129,10 @@ public class Logic {
 
 				Game createGame = new Game();
 				String name = JOptionPane.showInputDialog(snakeScreen, "Please enter the name of the game: ",
-						"Game name", JOptionPane.QUESTION_MESSAGE);
+						"Game name", JOptionPane.OK_CANCEL_OPTION);
+				if(name.equals(JOptionPane.CANCEL_OPTION)){
+					sdkLogic.deleteGame(createGame.getGameId());
+				}
 				createGame.setName(name);
 				createGame.setMapsize(30);
 				Gamer host = new Gamer();
@@ -133,7 +143,18 @@ public class Logic {
 				snakeScreen.getNewGame().setLogArea(snakeScreen.getNewGame().getMoveField());
 				System.out.println(message);
 
-				snakeScreen.getNewGame().getAvailableGamesTbl().setModel(sdkLogic.openGames());
+
+				//System.out.println(games);
+				//TableModelOpenGames tm = new TableModelOpenGames(games);
+				/*for(Game game: games){
+					tm.addGame(game);
+				}*/
+				//tm.setGames(games);
+				//snakeScreen.getNewGame().getAvailableGamesTbl().setModel(tm);
+
+
+
+
 
 			}else if(e.getSource() == snakeScreen.getNewGame().getShowLogRdbtn()){
 				snakeScreen.getNewGame().getHideLogRdbtn().setSelected(false);
@@ -158,7 +179,7 @@ public class Logic {
 	public class HighscoresActionListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e){
-			snakeScreen.getHighscores().getHighscoresTbl().setModel(sdkLogic.getHighscores());
+			//snakeScreen.getHighscores().getHighscoresTbl().setModel(sdkLogic.getHighscores());
 			if(e.getSource() == snakeScreen.getHighscores().getLogOutBtn()){
 				snakeScreen.show(SnakeScreen.Login);
 			}else if(e.getSource() == snakeScreen.getHighscores().getMenuBtn()){

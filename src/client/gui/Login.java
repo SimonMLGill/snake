@@ -15,6 +15,9 @@ import javax.swing.JButton;
 
 
 public class Login extends JPanel {
+
+	// variables/components of this JPanel
+
 	private JTextField usernameField;
 	private JPasswordField passwordField;
 	private JLabel usernameLbl;
@@ -26,6 +29,9 @@ public class Login extends JPanel {
 	/**
 	 * Create the panel.
 	 */
+
+	// components of the JPanel
+
 	public Login() {
 		setBackground(new Color(255, 255, 224));
 		setLayout(null);
@@ -68,15 +74,21 @@ public class Login extends JPanel {
 		add(loginBtn);
 
 	}
+
+	// adding actionlisteners to the JButton
 	
 	public void addActionListener (ActionListener l){
 		loginBtn.addActionListener(l);
 	}
-	
+
+	// method that clears the JTextfields
+
 	public void clearFields(){
 		usernameField.setText("");
 		passwordField.setText("");
 	}
+
+	// getters and setters to some components
 	
 	public JButton getLoginBtn(){
 		return loginBtn;
@@ -91,4 +103,5 @@ public class Login extends JPanel {
 		String password = passwordField.getText();
 		return password;
 	}
+
 }

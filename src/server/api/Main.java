@@ -24,8 +24,9 @@ public class Main {
         System.out.println("Server running");
         System.out.println("Visit: http://localhost:" + Config.getServerPort() + "/server/api");
        // Tui.createUser();
-        Logic logic = new Logic();
-        logic.run();
+        //Logic logic = new Logic();
+        //logic.run();
+        //Tui.create();
         Tui.serverMenu();
         System.out.println("Hit return to confirm to stop...");
         System.in.read();

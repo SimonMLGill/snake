@@ -1,30 +1,30 @@
 package client.gui;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import java.awt.Color;
-
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JTable;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
 
-import javax.swing.JTextField;
-import javax.swing.JButton;
-
 
 public class Highscores extends JPanel {
+
+	// variables/components of this JPanel
+
 	private JTable highscoresTbl;
 	private JTextField userField;
 	private JLabel snakeLbl;
 	private JLabel loggedInAsLbl;
 	private JButton logOutBtn;
 	private JButton menuBtn;
+	private JScrollPane scrollPane;
 
 	/**
 	 * Create the panel.
 	 */
+
+	// components of the JPanel
+
 	public Highscores() {
 		setBackground(new Color(255, 255, 224));
 		setLayout(null);
@@ -34,9 +34,18 @@ public class Highscores extends JPanel {
 		snakeLbl.setIcon(snake);
 		snakeLbl.setBounds(30, 11, 209, 81);
 		add(snakeLbl);
-		
+
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(40, 103, 357, 164);
+		scrollPane.setVisible(true);
+		add(scrollPane);
+
 		highscoresTbl = new JTable();
-		highscoresTbl.setBounds(40, 103, 357, 164);
+		highscoresTbl.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		highscoresTbl.setAutoCreateRowSorter(true);
+		scrollPane.setViewportView(highscoresTbl);
+		highscoresTbl.setFont(new Font("Gill Sans MT", Font.PLAIN, 11));
+		highscoresTbl.setVisible(true);
 		add(highscoresTbl);
 		
 		loggedInAsLbl = new JLabel("Logged in as:");
@@ -62,17 +71,28 @@ public class Highscores extends JPanel {
 		add(menuBtn);
 
 	}
-	
+
+	// adding actionlisteners to the JButtons
+
 	public void addActionListener(ActionListener h){
 		logOutBtn.addActionListener(h);
 		menuBtn.addActionListener(h);
 	}
-	
+
+	// getters and setters to some components
+
 	public JButton getLogOutBtn(){
 		return logOutBtn;
 	}
 	
 	public JButton getMenuBtn(){
 		return menuBtn;
+	}
+
+	public void setUserField(String user){
+		userField.setText(user);
+	}
+	public JTable getHighscoresTbl(){
+		return highscoresTbl;
 	}
 }

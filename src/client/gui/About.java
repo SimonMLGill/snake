@@ -15,6 +15,9 @@ import javax.swing.JTextArea;
 
 
 public class About extends JPanel {
+
+	// variables/components to this JPanel
+
 	private JTextField userField;
 	private JLabel loggedInAsLbl;
 	private JLabel snakeLbl;
@@ -26,6 +29,9 @@ public class About extends JPanel {
 	/**
 	 * Create the panel.
 	 */
+
+	// components of the JPanel
+
 	public About() {
 		setBackground(new Color(255, 255, 224));
 		setLayout(null);
@@ -69,13 +75,17 @@ public class About extends JPanel {
 		add(moreInfoBtn);
 
 	}
-	
+
+	// adding actionlisteners to buttons
+
 	public void addActionListener(ActionListener a){
 		logOutBtn.addActionListener(a);
 		menuBtn.addActionListener(a);
 		moreInfoBtn.addActionListener(a);
 	}
-	
+
+	// setters and getters to some of the components
+
 	public JButton getLogOutBtn(){
 		return logOutBtn;
 	}
@@ -88,4 +98,7 @@ public class About extends JPanel {
 		return moreInfoBtn;
 	}
 
+	public void setUserField(String user){
+		userField.setText(user);
+	}
 }

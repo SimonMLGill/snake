@@ -7,6 +7,10 @@ import javax.swing.border.EmptyBorder;
 
 
 public class SnakeScreen extends JFrame {
+
+	// screen class - effectively my JFrame
+	// variables/JPanels to the JFrame
+
 	public static final String Login = "login";
 	public static final String Menu = "menu";
 	public static final String Highscores = "highscores";
@@ -23,10 +27,13 @@ public class SnakeScreen extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+
+	// adding the JPanels to the JFrame
+
 	public SnakeScreen() {
 		setTitle("No Snake Eyes");
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 320);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -50,7 +57,9 @@ public class SnakeScreen extends JFrame {
 		
 		c = (CardLayout) getContentPane().getLayout();
 	}
-	
+
+	// getters to my JPanels
+
 	public Login getLogin(){
 		return login;
 	}
@@ -70,6 +79,8 @@ public class SnakeScreen extends JFrame {
 	public About getAbout(){
 		return about;
 	}
+
+	// method that ensures that my CardLayout is in effect
 	
 	public void show(String card){
 		c.show(this.getContentPane(), card);

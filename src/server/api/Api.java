@@ -26,7 +26,7 @@ public class Api {
     }
 
     @POST //"POST-request" er ny data vi kan indtaste for at logge ind.
-    @Path("/login/")
+    @Path("login/")
     @Produces("application/json")
     public Response login(String data) {
 
@@ -306,7 +306,7 @@ public class Api {
     @GET //"GET-request"
     @Path("/scores/")
     @Produces("application/json")
-    public String getHighscore(String data) {
+    public String getHighscore() {
 
         return new Gson().toJson(Logic.getHighscore());
 
@@ -421,6 +421,22 @@ public class Api {
         return Response
                 .status(201)
                 .entity(new Gson().toJson(score))
+                .header("Access-Control-Allow-Origin", "*")
+                .build();
+    }
+
+
+    /*
+    getting the highscores top ten list from the database
+     */
+
+    @GET
+    @Path("/highscores/")
+    @Produces("application/json")
+    public Response getHighScores(){
+        return Response
+                .status(200)
+                .entity(new Gson().toJson(Logic.getHighScores()))
                 .header("Access-Control-Allow-Origin", "*")
                 .build();
     }

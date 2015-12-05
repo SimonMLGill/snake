@@ -12,6 +12,9 @@ import java.awt.Color;
 
 
 public class Menu extends JPanel {
+
+	// variables/components of this JPanel
+
 	private JTextField userField;
 	private JButton newGameBtn;
 	private JButton highscoresBtn;
@@ -23,6 +26,9 @@ public class Menu extends JPanel {
 	/**
 	 * Create the panel.
 	 */
+
+	// components of the JPanel
+
 	public Menu() {
 		setBackground(new Color(255, 255, 224));
 		setLayout(null);
@@ -66,14 +72,18 @@ public class Menu extends JPanel {
 		add(logOutBtn);
 
 	}
-	
+
+	// adding actionlisteners to the JButtons
+
 	public void addActionListener(ActionListener m){
 		newGameBtn.addActionListener(m);
 		highscoresBtn.addActionListener(m);
 		aboutBtn.addActionListener(m);
 		logOutBtn.addActionListener(m);
 	}
-	
+
+	// getters and setters to some of the components
+
 	public JButton getNewGameBtn(){
 		return newGameBtn;
 	}
@@ -88,6 +98,11 @@ public class Menu extends JPanel {
 	
 	public JButton getLogOutBtn(){
 		return logOutBtn;
+	}
+
+	public void setUserField(String user){
+		userField.setText(user);
+
 	}
 
 }
